@@ -1,0 +1,12 @@
+# Herramientas
+.atl/
+
+# Sistema
+Thumbs.db
+Desktop.ini
+
+# Editor / SO
+.vscode/
+.idea/
+*.swp
+.DS_Store

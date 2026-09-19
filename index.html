@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¡Feliz 6° Cumpleaños, Princesa Siena!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rosa: #ffd6e8;
+    --lila: #e9d5ff;
+    --oro: #d4af37;
+    --oro-suave: #e8c96a;
+    --crema: #fffaf0;
+    --tinta: #5b3a5e;
+    --rosa-profundo: #e8739d;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Quicksand', sans-serif;
+    color: var(--tinta);
+    background: linear-gradient(180deg, var(--rosa), var(--lila));
+    overflow-x: hidden;
+  }
+  h1, h2, .carta-texto, .razon-num {
+    font-family: 'Playfair Display', serif;
+  }
+
+  /* ---- Sparkles flotantes ---- */
+  .sparkles { position: fixed; inset: 0; pointer-events: none; z-index: 5; overflow: hidden; }
+  .sparkle {
+    position: absolute;
+    color: var(--oro);
+    opacity: 0;
+    animation: flotar linear infinite;
+  }
+  @keyframes flotar {
+    0%   { transform: translateY(105vh) scale(0.6); opacity: 0; }
+    10%  { opacity: 0.9; }
+    50%  { opacity: 0.5; }
+    100% { transform: translateY(-8vh) scale(1.15); opacity: 0; }
+  }
+
+  /* ---- Hero ---- */
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 1.25rem 4rem;
+    background: linear-gradient(160deg, #ffe1ef 0%, var(--rosa) 45%, var(--lila) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 15% 25%, rgba(212,175,55,.18) 0, transparent 22%),
+      radial-gradient(circle at 85% 20%, rgba(212,175,55,.16) 0, transparent 24%),
+      radial-gradient(circle at 50% 90%, rgba(212,175,55,.12) 0, transparent 30%);
+    pointer-events: none;
+  }
+  .corona-big {
+    font-size: clamp(2.6rem, 8vw, 4.5rem);
+    display: inline-block;
+    animation: brillar 2.4s ease-in-out infinite;
+    filter: drop-shadow(0 4px 14px rgba(212,175,55,.55));
+  }
+  @keyframes brillar {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.12); }
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 6.5vw, 4.2rem);
+    font-weight: 900;
+    line-height: 1.15;
+    margin: .6rem 0 .4rem;
+    background: linear-gradient(120deg, #c7932a, var(--oro), #f4dd9a, var(--oro));
+    background-size: 250% 250%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: oro-en-vivo 6s ease infinite;
+    text-shadow: 0 0 40px rgba(212,175,55,.18);
+  }
+  @keyframes oro-en-vivo {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+  }
+  .hero .sub {
+    font-size: clamp(1.05rem, 3vw, 1.5rem);
+    font-weight: 600;
+    letter-spacing: .04em;
+    color: var(--rosa-profundo);
+    margin-bottom: 2rem;
+  }
+
+  .marco-ovalado {
+    width: min(64vw, 260px);
+    aspect-ratio: 3 / 4;
+    border-radius: 50% / 47%;
+    padding: 12px;
+    background: linear-gradient(150deg, #f7e3a7, var(--oro), #bf9a2e, var(--oro-suave));
+    box-shadow:
+      0 20px 45px -12px rgba(191,154,46,.55),
+      0 0 0 6px rgba(255,255,255,.55);
+    animation: entrar-suave 1s ease both;
+  }
+  @keyframes entrar-suave {
+    from { opacity: 0; transform: translateY(22px) rotate(-3deg); }
+    to   { opacity: 1; transform: translateY(0) rotate(0); }
+  }
+  .marco-ovalado img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50% / 47%;
+    display: block;
+  }
+
+  .flecha {
+    margin-top: 2.2rem;
+    font-size: 1.8rem;
+    animation: bajar 1.6s ease-in-out infinite;
+  }
+  @keyframes bajar {
+    0%, 100% { transform: translateY(0); opacity: .85; }
+    50%      { transform: translateY(8px); opacity: 1; }
+  }
+
+  /* ---- Secciones ---- */
+  section { padding: 4rem 1.25rem; scroll-margin-top: 1rem; }
+  .seccion-titulo {
+    text-align: center;
+    font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+    font-weight: 700;
+    margin-bottom: .5rem;
+  }
+  .seccion-sub {
+    text-align: center;
+    font-weight: 600;
+    color: rgba(91,58,94,.75);
+    margin-bottom: 2.5rem;
+  }
+
+  /* ---- Collage polaroid ---- */
+  .collage {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 1.6rem;
+    justify-items: center;
+  }
+  .polaroid {
+    background: #fff;
+    padding: 10px 10px 34px;
+    width: 100%;
+    max-width: 250px;
+    box-shadow: 0 12px 26px -10px rgba(91,58,94,.4);
+    position: relative;
+    transition: transform .35s ease, box-shadow .35s ease;
+  }
+  .polaroid:hover {
+    transform: scale(1.06) rotate(0deg) !important;
+    box-shadow: 0 20px 38px -12px rgba(91,58,94,.55);
+    z-index: 3;
+  }
+  .polaroid img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+    filter: saturate(1.05) contrast(1.02);
+  }
+  .polaroid .cinta {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-4deg);
+    width: 84px;
+    height: 22px;
+    background: rgba(232,201,106,.85);
+    box-shadow: 0 2px 4px rgba(0,0,0,.15);
+    z-index: 2;
+  }
+  .polaroid .peg {
+    position: absolute;
+    font-size: 1.25rem;
+    z-index: 3;
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,.2));
+  }
+  .polaroid .peg.p1 { top: -18px; right: -12px; transform: rotate(14deg); }
+  .polaroid .peg.p2 { bottom: -6px; left: -12px; transform: rotate(-12deg); }
+  .polaroid figcaption {
+    position: absolute;
+    bottom: 7px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-weight: 700;
+    font-size: .82rem;
+    letter-spacing: .06em;
+    color: #7a5b3b;
+  }
+
+  /* ---- Carta ---- */
+  .carta-wrap { max-width: 640px; margin: 0 auto; }
+  .carta {
+    background: var(--crema);
+    border: 3px solid var(--oro);
+    outline: 1px solid rgba(212,175,55,.4);
+    outline-offset: 6px;
+    border-radius: 14px;
+    padding: 2.2rem 1.8rem 2.8rem;
+    position: relative;
+    box-shadow: 0 18px 40px -14px rgba(91,58,94,.35);
+    animation: entrar-suave .9s ease both;
+  }
+  .carta .sello {
+    position: absolute;
+    top: -22px;
+    right: 18px;
+    font-size: 2.4rem;
+    background: radial-gradient(circle, var(--oro-suave), var(--oro));
+    width: 64px; height: 64px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 6px 14px rgba(0,0,0,.18);
+    transform: rotate(8deg);
+  }
+  .carta-texto {
+    font-size: clamp(1.02rem, 2.6vw, 1.18rem);
+    line-height: 1.85;
+    text-align: center;
+    color: #6b4a2f;
+    white-space: pre-line;
+  }
+  .carta-firma {
+    text-align: right;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    margin-top: 1.4rem;
+    color: var(--oro);
+  }
+
+  /* ---- 6 razones ---- */
+  .razones {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.3rem;
+  }
+  .razon {
+    background: rgba(255,255,255,.72);
+    backdrop-filter: blur(6px);
+    border: 1.5px solid rgba(212,175,55,.55);
+    border-radius: 18px;
+    padding: 1.6rem 1.4rem;
+    text-align: center;
+    box-shadow: 0 10px 24px -12px rgba(91,58,94,.35);
+    transition: transform .3s ease;
+  }
+  .razon:hover { transform: translateY(-6px); }
+  .razon-num {
+    font-size: 2.3rem;
+    font-weight: 900;
+    background: linear-gradient(140deg, var(--oro), #bf9a2e);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1;
+  }
+  .razon .emoji { font-size: 1.9rem; margin: .5rem 0; display: block; }
+  .razon p { font-weight: 600; font-size: 1rem; line-height: 1.5; }
+
+  /* ---- Torta ---- */
+  .torta-seccion { text-align: center; }
+  .torta-emoji {
+    font-size: clamp(4rem, 12vw, 6.5rem);
+    display: inline-block;
+    animation: saltar 1.6s ease-in-out infinite;
+  }
+  @keyframes saltar {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50%      { transform: translateY(-14px) rotate(3deg); }
+  }
+  .btn-deseo {
+    margin-top: 1.6rem;
+    font-family: 'Quicksand', sans-serif;
+    font-size: clamp(1.05rem, 3vw, 1.3rem);
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, var(--oro), #bf9a2e);
+    border: none;
+    border-radius: 999px;
+    padding: 1rem 2.4rem;
+    cursor: pointer;
+    box-shadow: 0 12px 26px -8px rgba(191,154,46,.6);
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .btn-deseo:hover { transform: scale(1.06); box-shadow: 0 16px 32px -8px rgba(191,154,46,.75); }
+  .btn-deseo:active { transform: scale(.97); }
+  .mensaje-magia {
+    margin-top: 1.5rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--rosa-profundo);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .6s ease, transform .6s ease;
+    min-height: 2.4em;
+  }
+  .mensaje-magia.visible { opacity: 1; transform: translateY(0); }
+
+  #confetti-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 50;
+  }
+
+  footer {
+    text-align: center;
+    padding: 2.5rem 1.25rem 3rem;
+    font-weight: 600;
+    letter-spacing: .03em;
+    color: rgba(91,58,94,.85);
+    background: linear-gradient(180deg, transparent, rgba(212,175,55,.18));
+  }
+
+  @media (max-width: 480px) {
+    .collage { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.1rem; }
+    .marco-ovalado { width: min(74vw, 240px); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Confetti canvas -->
+<canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+<!-- Sparkles flotantes (generados por JS) -->
+<div class="sparkles" aria-hidden="true"></div>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <span class="corona-big">👑</span>
+  <h1>¡Feliz 6° Cumpleaños, Princesa Siena!</h1>
+  <p class="sub">Eres nuestra princesa favorita</p>
+  <div class="marco-ovalado">
+    <img src="fotosSiena/WhatsApp Image 2026-09-19 at 18.39.12.jpeg" alt="Retrato de Siena, nuestra princesa">
+  </div>
+  <div class="flecha" aria-hidden="true">🙌</div>
+</header>
+
+<!-- ================= COLLAGE POLAROID ================= -->
+<section id="collage">
+  <h2 class="seccion-titulo">🌈 Nuestra galería de magia</h2>
+  <p class="seccion-sub">14 momentos que guardamos en nuestro corazón</p>
+  <div class="collage">
+    <figure class="polaroid" style="transform: rotate(-3deg);">
+      <span class="cinta"></span><span class="peg p1">👑</span>
+      <img src="fotosSiena/WhatsApp Image 2026-09-19 at 18.39.12.jpeg" alt="Foto de Siena 1" loading="lazy">
+      <figcaption>Reina por siempre</figcaption>
+    </figure>
+    <figure class="polaroid" style="transform: rotate(2.5deg);">
+      <span class="cinta"></span><span class="peg p2">🌈</span>
+      <img src="fotosSiena/WhatsApp Image 2026-09-19 at 18.39.58 (1).jpeg" alt="Foto de Siena 2" loading="lazy">
+      <figcaption>Colores de felicidad</figcaption>
+    </figure>
+    <figure class="polaroid" style="transform: rotate(-2deg);">
+      <span class="cinta"></span><span class="peg p1">🦄</span>
+      <img src="fotosSiena/WhatsApp Image 2026-09-19 at 18.39.58.jpeg" alt="Foto de Siena 3" loading="lazy">
+      <figcaption>Magia pura</figcaption>
+    </figure>
+    <figure class="polaroid" style="transform: rotate(3deg);">
+      <span class="cinta"></span><span class="peg p2">⭐</span>
+      <img src="fotosSiena/WhatsApp Image 2026-09-19 at 18.39.59 (1).jpeg" alt="Foto de Siena 4" loading="lazy">
+      <figcaption>Estrella brillante</figcaption>
+    </figure>
+    <figure class="polaroid" style="transform: rotate(-2.5deg);">
+      <span class="cinta"></span><span class="peg p1">💖</span>
+      <img src="fotosSiena/WhatsApp Image 2026-09-19 at 18.39.59.jpeg" alt="Foto de Siena 5" loading="lazy">
+      <figcaption>Siempre tú</figcaption>
+    </figure>
+    <figure class="polaroid" style="transform: rotate(2deg);">
+      <span class="cinta"></span><span class="peg p2">🎈</span>
+      <img src="fotosSiena/WhatsApp Image 2026-09-19 at 18.41.26.jpeg" alt="Foto de Siena 6" loading="lazy">
+      <figcaption>Día de fiesta</figcaption>
+    </figure>
+    <figure class="polaroid" style="transform: rotate(-3.5deg);">
+      <span class="cinta"></span><span class="peg p1">🌸</span>
+      <img src="fotosSiena/WhatsApp Image 2026-09-19 at 18.41.27.jpeg" alt="Foto de Siena 7" loading="lazy">
+      <figcaption>Floreciendo</figcaption>
+    </figure>
+    <figure class="polaroid" style="transform: rotate(1.5deg);">
+      <span class="cinta"></span><span class="peg p2">✨</span>
+      <img src="fotosSiena/WhatsApp Image 2026-09-19 at 18.41.46.jpeg" alt="Foto de Siena 8" loading="lazy">
+      <figcaption>Brillo propio</figcaption>
+    </figure>
+    <figure class="polaroid" style="transform: rotate(-2deg);">
+      <span class="cinta"></span><span class="peg p1">🧁</span>
+      <img src="fotosSiena/WhatsApp Image 2026-09-19 at 18.42.03.jpeg" alt="Foto de Siena 9" loading="lazy">
+      <figcaption>Dulce Siena</figcaption>
+    </figure>
+    <figure class="polaroid" style="transform: rotate(2.5deg);">
+      <span class="cinta"></span><span class="peg p2">🌟</span>
+      <img src="fotosSiena/WhatsApp Image 2026-09-19 at 18.42.18 (1).jpeg" alt="Foto de Siena 10" loading="lazy">
+      <figcaption>Luz que ilumina</figcaption>
+    </figure>
+    <figure class="polaroid" style="transform: rotate(-3deg);">
+      <span class="cinta"></span><span class="peg p1">🦋</span>
+      <img src="fotosSiena/WhatsApp Image 2026-09-19 at 18.42.18.jpeg" alt="Foto de Siena 11" loading="lazy">
+      <figcaption>Libre y feliz</figcaption>
+    </figure>
+    <figure class="polaroid" style="transform: rotate(3.5deg);">
+      <span class="cinta"></span><span class="peg p2">🎀</span>
+      <img src="fotosSiena/WhatsApp Image 2026-09-19 at 18.43.18.jpeg" alt="Foto de Siena 12" loading="lazy">
+      <figcaption>Nuestro tesoro</figcaption>
+    </figure>
+    <figure class="polaroid" style="transform: rotate(-1.5deg);">
+      <span class="cinta"></span><span class="peg p1">💝</span>
+      <img src="fotosSiena/WhatsApp Image 2026-09-19 at 18.43.47.jpeg" alt="Foto de Siena 13" loading="lazy">
+      <figcaption>Amor infinito</figcaption>
+    </figure>
+    <figure class="polaroid" style="transform: rotate(2deg);">
+      <span class="cinta"></span><span class="peg p2">🎉</span>
+      <img src="fotosSiena/WhatsApp Image 2026-09-19 at 18.44.26.jpeg" alt="Foto de Siena 14" loading="lazy">
+      <figcaption>¡Que empiece la fiesta!</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ================= CARTA ================= -->
+<section id="carta">
+  <h2 class="seccion-titulo">💌 Una carta para ti</h2>
+  <div class="carta-wrap">
+    <div class="carta">
+      <span class="sello">👑</span>
+      <p class="carta-texto">Querida Siena, hoy cumples seis años y el mundo se vuelve un poquito más brillante.
+
+Desde que llegaste, cada día tiene más risas, más abrazos y más magia. Eres curiosa, valiente y tan dulce como un pastel de fresa recién hecho.
+
+No importa cuántos años pasen, siempre serás nuestra princesa.
+
+Te amamos ayer, te amamos hoy y te amaremos por siempre.</p>
+      <p class="carta-firma">Con todo el amor del mundo 💛</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6 RAZONES ================= -->
+<section id="razones">
+  <h2 class="seccion-titulo">💖 6 razones por las que te amamos</h2>
+  <p class="seccion-sub">Una por cada año de vida</p>
+  <div class="razones">
+    <div class="razon">
+      <span class="razon-num">01</span>
+      <span class="emoji">😄</span>
+      <p>Tu sonrisa ilumina la casa entera, hasta en los días grises.</p>
+    </div>
+    <div class="razon">
+      <span class="razon-num">02</span>
+      <span class="emoji">🫂</span>
+      <p>Tus abrazos mágicos curan y llenan el corazón de todos.</p>
+    </div>
+    <div class="razon">
+      <span class="razon-num">03</span>
+      <span class="emoji">🤔</span>
+      <p>Tus preguntas y ocurrencias nos hacen ver el mundo con tus ojos.</p>
+    </div>
+    <div class="razon">
+      <span class="razon-num">04</span>
+      <span class="emoji">🎨</span>
+      <p>Tu imaginación convierte cualquier día en una aventura.</p>
+    </div>
+    <div class="razon">
+      <span class="razon-num">05</span>
+      <span class="emoji">🦸‍♀️</span>
+      <p>Eres valiente: te caes, te levantas y sigues adelante siempre.</p>
+    </div>
+    <div class="razon">
+      <span class="razon-num">06</span>
+      <span class="emoji">👑</span>
+      <p>Porque siendo exactamente como eres, eres nuestra princesa favorita.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TORTA ================= -->
+<section id="torta" class="torta-seccion">
+  <h2 class="seccion-titulo">🎂 ¡Hora de soplar las velitas!</h2>
+  <p class="seccion-sub">Cierra los ojos, piensa muy fuerte y pide tu deseo…</p>
+  <span class="torta-emoji" aria-hidden="true">🎂</span>
+  <div>
+    <button class="btn-deseo" id="btn-deseo" type="button">¡Pide un deseo mágico!</button>
+  </div>
+  <p class="mensaje-magia" id="mensaje-magia" role="status" aria-live="polite"></p>
+</section>
+
+<footer>
+  Hecho con amor para Siena, 6 años de pura magia ✨
+</footer>
+
+<script>
+  (function () {
+    'use strict';
+
+    var SPARKLES_HOST = document.querySelector('.sparkles');
+    var SIMBOLOS = ['✨', '⭐', '💛', '👑', '🌈', '🦄'];
+
+    function crearSparkle() {
+      var s = document.createElement('span');
+      s.className = 'sparkle';
+      s.textContent = SIMBOLOS[Math.floor(Math.random() * SIMBOLOS.length)];
+      s.style.left = (Math.random() * 100) + 'vw';
+      s.style.fontSize = (12 + Math.random() * 18) + 'px';
+      s.style.animationDuration = (9 + Math.random() * 8) + 's';
+      s.style.animationDelay = (Math.random() * 6) + 's';
+      SPARKLES_HOST.appendChild(s);
+    }
+
+    function encenderSparkles() {
+      for (var i = 0; i < 20; i++) {
+        setTimeout(crearSparkle, i * 180);
+      }
+    }
+
+    /* ---------- Confetti en canvas (propio, sin dependencias) ---------- */
+    var canvas = document.getElementById('confetti-canvas');
+    var ctx = canvas.getContext('2d');
+    var piezas = [];
+    var activo = false;
+
+    function TAMANO() {
+      canvas.width = window.innerWidth * devicePixelRatio;
+      canvas.height = window.innerHeight * devicePixelRatio;
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
+      ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+    }
+    TAMANO();
+    window.addEventListener('resize', TAMANO);
+
+    var COLORES = ['#d4af37', '#ffd6e8', '#e9d5ff', '#ff6f91', '#ffc2d1', '#fff0a8', '#c084fc', '#f472b6'];
+
+    function lanzarConfetti(cantidad) {
+      var ancho = window.innerWidth;
+      for (var i = 0; i < cantidad; i++) {
+        piezas.push({
+          x: ancho / 2 + (Math.random() - 0.5) * 90,
+          y: window.innerHeight * 0.55 + (Math.random() - 0.5) * 60,
+          vx: (Math.random() - 0.5) * 9,
+          vy: -8 - Math.random() * 10,
+          rot: Math.random() * Math.PI * 2,
+          vr: (Math.random() - 0.5) * 0.4,
+          tam: 6 + Math.random() * 8,
+          color: COLORES[Math.floor(Math.random() * COLORES.length)],
+          forma: Math.floor(Math.random() * 3),
+          gravedad: 0.32 + Math.random() * 0.12,
+          vida: 200 + Math.random() * 120
+        });
+      }
+      if (!activo) {
+        activo = true;
+        requestAnimationFrame(frameCon);
+      }
+    }
+
+    function frameCon() {
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      var alto = window.innerHeight;
+
+      piezas = piezas.filter(function (p) {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += p.gravedad;
+        p.rot += p.vr;
+        p.vx *= 0.992;
+        p.vy *= 0.993;
+        p.vida--;
+        if (p.y > alto + 20 || p.vida <= 0) return false;
+        dibujarPieza(p);
+        return true;
+      });
+
+      if (piezas.length > 0) {
+        requestAnimationFrame(frameCon);
+      } else {
+        activo = false;
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      }
+    }
+
+    function dibujarPieza(p) {
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.globalAlpha = Math.min(1, p.vida / 40);
+      ctx.fillStyle = p.color;
+      if (p.forma === 0) {
+        ctx.fillRect(-p.tam / 2, -p.tam / 2, p.tam, p.tam * 0.7);
+      } else if (p.forma === 1) {
+        ctx.beginPath();
+        ctx.arc(0, 0, p.tam / 2, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        ctx.beginPath();
+        ctx.moveTo(0, -p.tam / 2);
+        ctx.lineTo(p.tam / 3, p.tam / 3);
+        ctx.lineTo(-p.tam / 3, p.tam / 3);
+        ctx.closePath();
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    /* ---------- Mensaje mágico ---------- */
+    var btn = document.getElementById('btn-deseo');
+    var mensaje = document.getElementById('mensaje-magia');
+    var MENSAJES = [
+      'Tu deseo ya está volando hacia las estrellas ✨',
+      '¡Los hadas lo leen en voz alta y sonríen! 🧚‍♀️',
+      'Deseo recibido: ahora solo falta creer un poquito 💫',
+      'La magia ya empezó a trabajar en tu favor 🌙',
+      '¡Wish granted! Que este año sea el más mágico 🎠'
+    ];
+
+    btn.addEventListener('click', function () {
+      lanzarConfetti(160);
+      var idx = Math.floor(Math.random() * MENSAJES.length);
+      mensaje.textContent = MENSAJES[idx];
+      mensaje.classList.remove('visible');
+      void mensaje.offsetWidth;
+      mensaje.classList.add('visible');
+    });
+
+    encenderSparkles();
+  })();
+</script>
+</body>
+</html>
