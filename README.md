@@ -1,6 +1,6 @@
-# ¡Feliz 6° Cumpleaños, Princesa Siena!
+# ¡Feliz 6° Cumpleaños, Princesa Sienna!
 
-Página web de cumpleaños para Siena (6 años), con tema de princesa, collage polaroid de 14 fotos reales, carta de amor, 6 razones y confetti mágico.
+Página web de cumpleaños para Sienna (6 años), con tema de princesa, collage polaroid de 14 fotos reales, carta de amor, 6 razones y confetti mágico.
 
 ## Cómo publicar en GitHub Pages
 
